@@ -44,6 +44,68 @@ def get_style(label):
         return "summer"
     return "casual"
 
+
+def get_occasion(label):
+    """Rule-based occasion classifier.
+    Returns a list of (occasion, reason) tuples for the detected garment.
+    Occasions: casual, formal, sport, beach, party, work, outdoor
+    """
+    rules = {
+        "T-shirt/top": [
+            ("Casual", "Great for everyday outings and relaxed hangouts"),
+            ("Sport", "Light fabric makes it ideal for workouts and gym sessions"),
+            ("Outdoor", "Comfortable choice for parks, hikes, and casual walks"),
+        ],
+        "Trouser": [
+            ("Work", "Smart trousers fit perfectly in professional or office settings"),
+            ("Formal", "Pairs well with a shirt or blazer for formal occasions"),
+            ("Casual", "Versatile enough for everyday smart-casual looks"),
+        ],
+        "Pullover": [
+            ("Casual", "Cozy and effortless for everyday wear"),
+            ("Outdoor", "Perfect for cool-weather outings and weekend strolls"),
+            ("Sport", "Works well as a warm-up layer during training"),
+        ],
+        "Dress": [
+            ("Party", "An elegant dress is a staple for parties and social events"),
+            ("Formal", "Depending on the cut, suits formal dinners and ceremonies"),
+            ("Casual", "A day dress is a chic and comfortable everyday option"),
+        ],
+        "Coat": [
+            ("Formal", "A tailored coat elevates any formal or business outfit"),
+            ("Work", "Ideal layering piece for office commutes in cold weather"),
+            ("Outdoor", "Essential outerwear for autumn and winter outdoor activities"),
+        ],
+        "Sandal": [
+            ("Beach", "Sandals are the quintessential beach and poolside footwear"),
+            ("Casual", "Relaxed and breezy for warm-weather casual outings"),
+            ("Outdoor", "Comfortable for light walks, markets, and summer festivals"),
+        ],
+        "Shirt": [
+            ("Work", "A classic shirt is the backbone of any professional wardrobe"),
+            ("Formal", "Pairs with trousers or a suit for formal and smart events"),
+            ("Casual", "Worn open or tucked in for a smart-casual everyday look"),
+        ],
+        "Sneaker": [
+            ("Sport", "Engineered for performance — perfect for the gym and running"),
+            ("Casual", "Sneakers are a universal choice for everyday street style"),
+            ("Outdoor", "Durable and comfortable for long walks and urban exploration"),
+        ],
+        "Bag": [
+            ("Work", "A structured bag keeps essentials organized in a professional setting"),
+            ("Casual", "A casual tote or backpack is ideal for day-to-day use"),
+            ("Outdoor", "Handy for travel, hiking, and carrying gear on the go"),
+        ],
+        "Ankle boot": [
+            ("Formal", "Chelsea or heeled ankle boots add a refined touch to formal looks"),
+            ("Casual", "Versatile boots that work with jeans and relaxed outfits"),
+            ("Outdoor", "Sturdy enough for autumn outdoor activities and urban walking"),
+        ],
+    }
+    return rules.get(label, [
+        ("Casual", "A versatile piece suitable for most everyday occasions"),
+    ])
+
 def get_approx_color(image_bytes):
     from PIL import Image
     import io
